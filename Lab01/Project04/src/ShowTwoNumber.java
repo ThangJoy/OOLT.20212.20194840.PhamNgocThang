@@ -1,5 +1,6 @@
+
 import javax.swing.JOptionPane;
-public class ShowTWoNumber {
+public class ShowTwoNumber {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -14,3 +15,4 @@ public class ShowTWoNumber {
 	}
 
 }
+
