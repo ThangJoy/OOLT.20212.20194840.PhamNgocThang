@@ -1,32 +1,57 @@
 import javax.swing.JOptionPane;
-
 public class Cart {
 public static final int MAX_NUMBER_ORDERED = 20;
 private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBER_ORDERED];
-private int qtyOrdered=0;
+private int qtyOrdered=-1;int h=0;
 public void addDigitalVideoDisc(DigitalVideoDisc disc)
 {
-	if (qtyOrdered<MAX_NUMBER_ORDERED)
+	if (qtyOrdered<MAX_NUMBER_ORDERED-1)
 	{
 		qtyOrdered++;
 		itemsOrdered[qtyOrdered] = disc;
-		System.out.println("The disc "+qtyOrdered+" has been added");
+		
+		JOptionPane. showMessageDialog(null,"The disc No."+ (qtyOrdered+1)+ " has been added successfully");
+		 
 	}else
-		System.out.println("The cart is almost full");
-	
+	{
+		 h++;
+		 JOptionPane. showMessageDialog(null,"The disc No." +(qtyOrdered+h+1)+ " was not add to Cart","The Cart is full",JOptionPane.INFORMATION_MESSAGE);
+
+    } 
 }
 public void removeDigitalVideoDisc(DigitalVideoDisc disc)
 {
-	
+	int i,j,k=0;
+	for (i=0;i<qtyOrdered;i++)
+	{
+		if(itemsOrdered[i]==disc)
+		{
+			k=1;
+		    break;
+		}
+	}
+	if (k==1)
+	{
+		
+	for(j=i;j<qtyOrdered;j++)
+	{
+		itemsOrdered[j]=itemsOrdered[j+1];
+	}
+	qtyOrdered--;
+	JOptionPane. showMessageDialog(null,"The disc No."+ (i+1)+ " has been successfully removed");
+	} else
+	{
+		JOptionPane. showMessageDialog(null,"The removing DVD doesn't appeared in Cart");
+	}
 }
-public void totalCost()
+public float totalCost()
 {
 	int i=0;
 	float cost=0;
-	for (i=1;i<=qtyOrdered;i++)
+	for (i=0;i<=qtyOrdered;i++)
 	{ 
-		cost+=itemsOrdered[i].getCost();		 
+		cost+=itemsOrdered[i].getCost();
 	}
-System.out.println("Total Cost is " + cost);
+return cost;
 }
 }
