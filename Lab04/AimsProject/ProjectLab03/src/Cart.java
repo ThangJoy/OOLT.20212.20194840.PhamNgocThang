@@ -9,7 +9,6 @@ public void addDigitalVideoDisc(DigitalVideoDisc disc)
 	if (qtyOrdered<MAX_NUMBER_ORDERED-1)
 	{
 		
-		System.out.println(qtyOrdered);
 		itemsOrdered[qtyOrdered] = disc;
 		
 		JOptionPane. showMessageDialog(null,"The disc No."+ (qtyOrdered+1)+ " has been added successfully");
@@ -24,18 +23,29 @@ public void addDigitalVideoDisc(DigitalVideoDisc disc)
 }
 public void addDigitalVideoDisc(DigitalVideoDisc[] dvdlist)
 {
+	    int i;
+	    if (qtyOrdered+5<=MAX_NUMBER_ORDERED-1) // We can add a list of 5 DVDs at once
+	    {
+	    	for(i=0;i<5;i++)
+	    	{
+	    		addDigitalVideoDisc(dvdlist[i]);
+	    	}
+	    }
+}
+public void addDigitalVideoDisc(DigitalVideoDisc[] dvdlist,int a)//a is just for classify with the above,can be arbitrary
+{
     int size = dvdlist.length;
-    System.out.println(size);
     int i;
     if (qtyOrdered+size<=MAX_NUMBER_ORDERED-1) 
     {
-    	for(i=0;i<=size;i++)
+    	for(i=0;i<size;i++)
     	{
     		addDigitalVideoDisc(dvdlist[i]);
     	}
     }
 
-}public void addDigitalVideoDisc(DigitalVideoDisc dvd1,DigitalVideoDisc dvd2)
+}
+public void addDigitalVideoDisc(DigitalVideoDisc dvd1,DigitalVideoDisc dvd2)
 {
 	addDigitalVideoDisc(dvd1);
 	addDigitalVideoDisc(dvd2);
@@ -69,10 +79,125 @@ public float totalCost()
 {
 	int i=0;
 	float cost=0;
-	for (i=0;i<=qtyOrdered;i++)
+	for (i=0;i<qtyOrdered;i++)
 	{ 
 		cost+=itemsOrdered[i].getCost();
 	}
 return cost;
+}
+public void sortByCost(DigitalVideoDisc[] sorted)
+{
+	DVDUtils a = new DVDUtils();
+	a.sortByCost(sorted);
+	for (int i=0;i<sorted.length;i++)
+	{
+		System.out.println("Disc No."+sorted[i].getId()+":"+sorted[i].getCost());
+	}
+	
+}
+public void sortByTitle(DigitalVideoDisc[] sorted)
+{
+	DVDUtils a = new DVDUtils();
+	a.sortByTitle(sorted);
+	for (int i=0;i<sorted.length;i++)
+	{
+		System.out.println("Disc No."+sorted[i].getId()+":"+sorted[i].getTitle());
+	}
+	
+}
+public void search(DigitalVideoDisc disc)
+{
+	
+		h=0;
+	for(int i=0;i<qtyOrdered;i++)
+	{
+		if(itemsOrdered[i]==disc)
+		{
+			h=1;
+			JOptionPane. showMessageDialog(null,disc,"The disc number is found",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		}
+	}
+	if(h==0)
+	{
+		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc" ,"The disc is not found",JOptionPane.INFORMATION_MESSAGE);
+
+	}
+	
+}
+public void search(DigitalVideoDisc[] sorted)
+{
+	for(int j=0;j<sorted.length;j++)
+	{
+		h=0;
+	for(int i=0;i<qtyOrdered;i++)
+	{
+		if(itemsOrdered[i]==sorted[j])
+		{
+			h=1;
+			JOptionPane. showMessageDialog(null,sorted[j],"The disc number "+(j+1)+" is found",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		}
+	}
+	if(h==0)
+	{
+		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc number " +(j+1),"The disc is not found",JOptionPane.INFORMATION_MESSAGE);
+
+	}
+	
+	}
+}
+public void search(int a)
+{
+	
+		h=0;
+	for(int i=0;i<qtyOrdered;i++)
+	{
+		if(itemsOrdered[i].getId()==a)
+		{
+			h=1;
+			JOptionPane. showMessageDialog(null,itemsOrdered[i],"The disc number is found",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		}
+	}
+	if(h==0)
+	{
+		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc" ,"The disc is not found",JOptionPane.INFORMATION_MESSAGE);
+
+	}
+	
+}
+public void search(int[] sorted)
+{
+	for(int j=0;j<sorted.length;j++)
+	{
+		h=0;
+	for(int i=0;i<qtyOrdered;i++)
+	{
+		if(itemsOrdered[i].getId()==sorted[j])
+		{
+			h=1;
+			JOptionPane. showMessageDialog(null,sorted[j],"The disc number "+sorted[j]+" is found",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		}
+	}
+	if(h==0)
+	{
+		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc number " +sorted[j],"The disc is not found",JOptionPane.INFORMATION_MESSAGE);
+
+	}
+	
+	}
+}
+public void print()
+{
+	DVDUtils a = new DVDUtils();
+	a.print(itemsOrdered,qtyOrdered);
+	System.out.printf("***********************CART***********************\n\nOrdered Items:\n");
+	for(int i=0;i<qtyOrdered;i++)
+	{
+		System.out.println(i+1+". "+itemsOrdered[i]);
+	}
+	System.out.printf("Total cost: %.2f\n**************************************************",totalCost());
 }
 }
