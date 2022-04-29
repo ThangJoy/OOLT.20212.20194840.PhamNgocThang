@@ -2,7 +2,7 @@ package hust.soict.globalict.test.cart;
 
 import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.disc.DigitalVideoDisc;
-import hust.soict.globalict.test.utils.DVDUtils;
+import hust.soict.globalict.aims.utils.DVDUtils;
 
 public class CartTest {
 	public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class CartTest {
 		// System.out.println(dvd3.getId());
 	   // System.out.printf("Total Cost is %.2f\n",anOrder.totalCost());
 	    DigitalVideoDisc dvdlist[]= {dvd1,dvd2,dvd3};
-	    anOrder.addDigitalVideoDisc(dvdlist,1);
+	    anOrder.addDigitalVideoDisc(dvdlist);
 	    //anOrder.sortByCost(dvdlist);
 	    //anOrder.sortByTitle(dvdlist);
 	   anOrder.removeDigitalVideoDisc(dvd3);

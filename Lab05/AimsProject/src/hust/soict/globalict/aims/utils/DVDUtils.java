@@ -1,4 +1,4 @@
-package hust.soict.globalict.test.utils;
+package hust.soict.globalict.aims.utils;
 import hust.soict.globalict.aims.disc.DigitalVideoDisc;
 
 public class DVDUtils {
@@ -25,13 +25,13 @@ public void compareByTitle(DigitalVideoDisc dvd1,DigitalVideoDisc dvd2)
 	
 }
 
-public void sortByCost(DigitalVideoDisc[] sorted)
+public void sortByCost(DigitalVideoDisc[] sorted,int a)
 {
-	for(int i=0;i<sorted.length-1;i++)
+	for(int i=0;i<a-1;i++)
 	{
-		for (int j=i+1;j<sorted.length;j++)
+		for (int j=i+1;j<a;j++)
 		{
-			if(sorted[i].getCost()>sorted[j].getCost())
+			if(sorted[i].getCost()<sorted[j].getCost())
 			{
 				Wrapper o1=new Wrapper(sorted[i]);
 				Wrapper o2=new Wrapper(sorted[j]);
@@ -39,24 +39,46 @@ public void sortByCost(DigitalVideoDisc[] sorted)
 			    sorted[i]=o1.a;
 			    sorted[j]=o2.a;
 			}
+			if(sorted[i].getCost()==sorted[j].getCost())
+			{
+				if(sorted[i].getTitle().compareTo(sorted[j].getTitle())>0)
+				{
+					Wrapper o1=new Wrapper(sorted[i]);
+					Wrapper o2=new Wrapper(sorted[j]);
+				    swap(o1,o2);
+				    sorted[i]=o1.a;
+				    sorted[j]=o2.a;
+				}
+			}
 		}
 	}
 
 }
 
-public void sortByTitle(DigitalVideoDisc[] sorted)
+public void sortByTitle(DigitalVideoDisc[] sorted,int a)
 {
-	for(int i=0;i<sorted.length-1;i++)
+	for(int i=0;i<a-1;i++)
 	{
-		for (int j=i+1;j<sorted.length;j++)
-		{
-			if(sorted[i].getTitle().compareTo(sorted[j].getTitle())>0)
+		for (int j=i+1;j<a;j++)
+		{ int k= sorted[i].getTitle().compareTo(sorted[j].getTitle());
+			if(k>0)
 			{
 				Wrapper o1=new Wrapper(sorted[i]);
 				Wrapper o2=new Wrapper(sorted[j]);
 			    swap(o1,o2);
 			    sorted[i]=o1.a;
 			    sorted[j]=o2.a;
+			}
+			if(k==0)
+			{
+				if (sorted[i].getCost()<sorted[j].getCost())
+				{
+					Wrapper o1=new Wrapper(sorted[i]);
+					Wrapper o2=new Wrapper(sorted[j]);
+				    swap(o1,o2);
+				    sorted[i]=o1.a;
+				    sorted[j]=o2.a;
+				}
 			}
 		}
 	}

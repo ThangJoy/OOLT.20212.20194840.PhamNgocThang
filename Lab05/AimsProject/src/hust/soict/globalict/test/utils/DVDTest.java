@@ -1,6 +1,6 @@
-package hust.soict.globalict.aims.utils;
+package hust.soict.globalict.test.utils;
 import hust.soict.globalict.aims.disc.DigitalVideoDisc;
-import hust.soict.globalict.test.utils.DVDUtils;
+import hust.soict.globalict.aims.utils.DVDUtils;
 
 public class DVDTest {
 
@@ -13,7 +13,7 @@ public class DVDTest {
 		DigitalVideoDisc dvd5= new DigitalVideoDisc("EEEE","eeee","eeee",5,3.3f);
 		DigitalVideoDisc[] sorted= {dvd5,dvd2,dvd3,dvd4,dvd1};
 		DVDUtils a=new DVDUtils();
-		a.sortByTitle(sorted);
+		a.sortByTitle(sorted,sorted.length);
 		for (int i=0;i<sorted.length;i++)
 		{
 			System.out.println(sorted[i].getTitle());
