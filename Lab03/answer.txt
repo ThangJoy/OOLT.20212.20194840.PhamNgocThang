@@ -1,0 +1,6 @@
+
+
+Question
+
+Yes
+A class can have multiple constructors, as long as their signature (the parameters they take) are not the same. You can define as many constructors as you need.

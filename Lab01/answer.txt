@@ -1,0 +1,3 @@
+-Not thing happen the program don’t run
+-Change the  option==JOptionPane.YES_OPTION?”Yes”:”No” to
+          option==JOptionPane.YES_OPTION?"I do":"I don't"
