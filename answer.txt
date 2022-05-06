@@ -1,0 +1,26 @@
+String outputString="";
+	for(byte b : inputBytes)
+	{
+		outputString+=(char)b;
+	}
+As we have learned that
+String is an immutable type:
+Object does not change the value after being created
+Strings are designed for not changing their values
+Concatenating strings will create a new object to store the result
+=>after every code:
+outputString+=(char)b;
+the program 'll create new object here is outputString to concatenate the char b
+String concatenation is memory consuming
+=>the running time is long for huge file
+
+for(byte b:inputBytes)
+	{
+		outputStringBuilder.append((char)b);
+	}
+StringBuffer/StringBuilder is a mutable type:
+Object can change the value after being created
+=> the program don't need to create new object after each loop so the much more efficient for memory
+=>the running time is very fast
+
+
