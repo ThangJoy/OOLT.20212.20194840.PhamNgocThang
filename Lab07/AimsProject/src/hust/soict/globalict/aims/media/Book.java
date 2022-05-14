@@ -14,6 +14,8 @@ public class Book extends Media{
 		super(title, category,cost);
 		//this.authors = authors;
 		this.contentLength = contentLength;
+		nbMedia++;
+		this.id=nbMedia;
 	}
 		// TODO Auto-generated constructor stub
 
@@ -22,6 +24,8 @@ public class Book extends Media{
 			//this.authors = authors;
 			this.authors=authors;
 			this.contentLength = contentLength;
+			nbMedia++;
+			this.id=nbMedia;
 		}
 		public Book(String title, String category, float cost) {
 		super(title, category, cost);
@@ -47,6 +51,24 @@ public class Book extends Media{
 		this.authors=authors;
 		nbMedia++;
 		this.id=nbMedia;
+	}
+	public Book()
+	{
+		super();
+		nbMedia++;
+		this.id=nbMedia;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public void setCost(float cost) {
+		this.cost = cost;
+	}
+	public static void setNbMedia(int nbMedia) {
+		Media.nbMedia = nbMedia;
 	}
 		private List<String> authors = new ArrayList<String>();
 		private String contentLength;
@@ -128,16 +150,13 @@ public class Book extends Media{
 				    
 				}
 			}
+			buffer=buffer.deleteCharAt(buffer.length()-2);
 			s=buffer.toString();
 			return s;
 			}
 				
 		}
-		public Book()
-		{
-			nbMedia++;
-			this.id=nbMedia;
-		}
+	
 		public void addAuthor(String authorName)
 		
 		{
@@ -197,15 +216,18 @@ public class Book extends Media{
 		public String toString()
 		{
 			StringBuffer a=new StringBuffer();
+			if (this.authors.size()>0)
+			{
 			for(int i=0;i<this.authors.size();i++)
 			{
 				a.append(this.authors.get(i));
-				a.append(' ');
+				a.append(", ");
+			}
+			a=a.deleteCharAt(a.length()-2);
 			}
 			
-			return "Book - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+a.toString()+"\n"+
-		contentLength()+" - "+": "+this.cost+"$";
+			return "BOOK  - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+a.toString()+"-"+
+		this.contentLength()+" - "+": "+this.cost+"$";
 			
 		}
 	}
-

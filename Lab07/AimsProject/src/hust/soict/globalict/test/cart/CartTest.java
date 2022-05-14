@@ -1,7 +1,6 @@
 package hust.soict.globalict.test.cart;
 
 import hust.soict.globalict.aims.cart.Cart;
-import hust.soict.globalict.aims.media.Book;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.utils.DVDUtils;
 
@@ -17,21 +16,13 @@ public class CartTest {
 		DigitalVideoDisc dvd3= new DigitalVideoDisc("Aladin","Animation",18.99f);
 		// System.out.println(dvd3.getId());
 	   // System.out.printf("Total Cost is %.2f\n",anOrder.totalCost());
-	    //DigitalVideoDisc dvdlist[]= {dvd1,dvd2,dvd3};
-	    anOrder.addMedia(dvd1);
-	    anOrder.addMedia(dvd2);
-	    anOrder.addMedia(dvd3);
-	    anOrder.addMedia(dvd2);
-	    anOrder.removeMedia(dvd3);
-	   System.out.println( anOrder.totalCost());
-	   Book book = new Book("The Lion King","Animation",87f,"dcvc fecece f e e ");
-	   book.contentLength();
-	  // System.out.println( anOrder.getALuckyItem());
-	    //anOrder.removeMedia(dvd1);
+	    DigitalVideoDisc dvdlist[]= {dvd1,dvd2,dvd3};
+	   // anOrder.addDigitalVideoDisc(dvdlist);
 	    //anOrder.sortByCost(dvdlist);
 	    //anOrder.sortByTitle(dvdlist);
 	  // anOrder.removeDigitalVideoDisc(dvd3);
 	  //  anOrder.search(dvdlist);
 	   // anOrder.print();
+	    anOrder.test();
 }
 }

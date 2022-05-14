@@ -12,6 +12,7 @@ public static final int MAX_NUMBER_ORDERED = 20;
 private  ArrayList<Media> itemsOrdered = new ArrayList<Media>();
 private  ArrayList<DigitalVideoDisc> itemsOrderedDvd = new ArrayList<DigitalVideoDisc>();
 private  ArrayList<Book> itemsOrderedBook= new ArrayList<Book>();
+private  ArrayList<CompactDisc> itemsOrderedCd= new ArrayList<CompactDisc>();
 int h=0;
 
 public DigitalVideoDisc[] getDvd()
@@ -26,18 +27,36 @@ public Book[] getBook()
 	itemsOrderedBook.toArray(a);
 	return a;
 }
+public CompactDisc[] getCd()
+{
+	CompactDisc[] a = new CompactDisc[itemsOrderedCd.size()];
+	itemsOrderedCd.toArray(a);
+	return a;
+}
 public Media[] getMedia()
 {
 	Media[] a = new Media[itemsOrdered.size()];
 	itemsOrdered.toArray(a);
 	return a;
 }
+public ArrayList<Media> getMedia1()
+{
+	return itemsOrdered;
+}
+public ArrayList<CompactDisc> getCd1()
+{
+	return itemsOrderedCd;
+}
+public ArrayList<DigitalVideoDisc> getDvd1()
+{
+	return itemsOrderedDvd;
+}
 public void addMedia(DigitalVideoDisc disc)
 {
 	int k=0;
 	for(int i=0;i<itemsOrderedDvd.size();i++)
 	{
-		if(itemsOrderedDvd.get(i).getTitle().compareToIgnoreCase(disc.getTitle())==0)
+		/*if(itemsOrderedDvd.get(i).getTitle().compareToIgnoreCase(disc.getTitle())==0)
 		{
 		if(itemsOrderedDvd.get(i).getCategory().compareToIgnoreCase(disc.getCategory())==0)
 		{
@@ -51,12 +70,17 @@ public void addMedia(DigitalVideoDisc disc)
 			
             k=1;
 			break;
-		}}}}}
-	 }
+		}}}}}*/
+		if(itemsOrderedDvd.get(i).getId()==disc.getId())
+		{
+			k=1;
+			break;
+		}
+	}
 	if(k==1) 
 	{
-	JOptionPane.showMessageDialog(null,"The disc is already exist","Please try again",JOptionPane.ERROR_MESSAGE);
-	disc.setNbMedia(disc.getId()-1);
+	JOptionPane.showMessageDialog(null,"The disc is already been added to cart before","Please try again",JOptionPane.ERROR_MESSAGE);
+	//disc.setNbMedia(disc.getId()-1);
 	}
 	if(k==0) 
 	{
@@ -84,7 +108,7 @@ public void addMedia(Book book)
 	int k=0;
 	for(int i=0;i<itemsOrderedBook.size();i++)
 	{
-		if(itemsOrderedBook.get(i).getTitle().compareToIgnoreCase(book.getTitle())==0)
+		/*if(itemsOrderedBook.get(i).getTitle().compareToIgnoreCase(book.getTitle())==0)
 		{
 		if(itemsOrderedBook.get(i).getCategory().compareToIgnoreCase(book.getCategory())==0)
 		{
@@ -96,12 +120,18 @@ public void addMedia(Book book)
 			
             k=1;
 			break;
-		}}}}
+		}}}}*/
+		if(itemsOrderedBook.get(i).getId()==book.getId())
+		{
+			k=1;
+			break;
+		}
 	 }
+	
 	if(k==1) 
 	{
-	JOptionPane.showMessageDialog(null,"The book is already exist","Please try again",JOptionPane.ERROR_MESSAGE);
-	book.setNbMedia(book.getId()-1);
+	JOptionPane.showMessageDialog(null,"The book is already been added to cart before","Please try again",JOptionPane.ERROR_MESSAGE);
+	//book.setNbMedia(book.getId()-1);
 	}
 	if(k==0) 
 	{
@@ -120,6 +150,41 @@ public void addMedia(Book book)
 	    } 
 	}
 	
+}
+public void addMedia(CompactDisc cd)
+{
+	int k=0;
+	for(int i=0;i<itemsOrderedCd.size();i++)
+	{
+		if(itemsOrderedCd.get(i).getId()==cd.getId())
+		{
+			k=1;
+			break;
+		}
+		
+			
+	}
+	if(k==1) 
+	{
+	JOptionPane.showMessageDialog(null,"The Cd is already been added to cart before","Please try again",JOptionPane.ERROR_MESSAGE);
+	//book.setNbMedia(book.getId()-1);
+	}
+	if(k==0) 
+	{
+		if (itemsOrdered.size()<MAX_NUMBER_ORDERED)
+		{
+			
+			itemsOrdered.add(itemsOrdered.size(),cd);
+			itemsOrderedCd.add(itemsOrderedBook.size(),cd);
+			
+			JOptionPane. showMessageDialog(null,"The cd Id."+ cd.getId()+ " has been added successfully");
+			 
+		}else
+		{
+			 JOptionPane. showMessageDialog(null,"The cd Id." +cd.getId()+ " was not add to Cart","The Cart is full",JOptionPane.ERROR_MESSAGE);
+
+	    } 
+	}
 }
 
 /*public void addDigitalVideoDisc(DigitalVideoDisc[] dvdlist)
@@ -145,7 +210,6 @@ public void addMedia(Book book)
     	}
     }
     qtyOrdered+=size;
-
 }
 public void addDigitalVideoDisc(DigitalVideoDisc dvd1,DigitalVideoDisc dvd2)
 {
@@ -194,7 +258,7 @@ public void removeMedia(DigitalVideoDisc disc)
 }
 public void removeMedia(Book book)
 {
-	if(itemsOrderedDvd.size()==0)
+	if(itemsOrderedBook.size()==0)
 	{
 		JOptionPane. showMessageDialog(null,"There's no book in Cart","Oops",JOptionPane.ERROR_MESSAGE);
 	}
@@ -227,6 +291,41 @@ public void removeMedia(Book book)
 	}
 	}
 }
+public void removeMedia(CompactDisc cd)
+{
+	if(itemsOrderedCd.size()==0)
+	{
+		JOptionPane. showMessageDialog(null,"There's no cd in Cart","Oops",JOptionPane.ERROR_MESSAGE);
+	}
+	else
+	{
+	int i,j,k=0;
+	for (i=0;i<itemsOrderedCd.size();i++)
+	{
+		if(itemsOrderedCd.get(i)==cd)
+		{
+			k=1;
+			itemsOrderedCd.remove(i);
+			for(j=0;j<itemsOrdered.size();j++)
+			{
+				if (itemsOrdered.get(j)==cd) 
+					{
+					itemsOrdered.remove(j);
+				    break;
+					}
+			}
+		    break;
+		}
+	}
+	if (k==1)
+	{
+	JOptionPane. showMessageDialog(null,"The cd Id."+ cd.getId()+ " has been successfully removed");
+	} else
+	{
+		JOptionPane. showMessageDialog(null,"The removing cd doesn't appeared in Cart");
+	}
+	}
+}
 public void removeMedia(Media disc)
 {
 	if(itemsOrdered.size()==0)
@@ -255,6 +354,14 @@ public void removeMedia(Media disc)
 				if (itemsOrderedBook.get(j).getId()==disc.getId()) 
 			 { 
 					itemsOrderedBook.remove(j);
+				    break;
+			 }
+			}
+			for(j=0;j<itemsOrderedCd.size();j++)
+			{
+				if (itemsOrderedCd.get(j).getId()==disc.getId()) 
+			 { 
+					itemsOrderedCd.remove(j);
 				    break;
 			 }
 			}
@@ -357,29 +464,32 @@ public void sortByTitle()
 }
 public void sortByCost()
 {
-	for(int i=0;i<itemsOrdered.size()-1;i++)
+	Media[] a = new Media[itemsOrdered.size()];
+	itemsOrdered.toArray(a);
+	
+	for(int i=0;i<a.length-1;i++)
 	{
-		for (int j=i+1;j<itemsOrdered.size();j++)
+		for (int j=i+1;j<a.length;j++)
 		{
-			if(itemsOrdered.get(i).getCost()>itemsOrdered.get(j).getCost())
+			if(a[i].getCost()>a[j].getCost())
 			{
-				Wrapper o1=new Wrapper(itemsOrdered.get(i));
-				Wrapper o2=new Wrapper(itemsOrdered.get(j));
+				Wrapper o1=new Wrapper(a[i]);
+				Wrapper o2=new Wrapper(a[j]);
 			    swap(o1,o2);
-			   itemsOrdered.add(i,o1.a);
-			   itemsOrdered.add(j,o2.a);
+			    a[i]=o1.a;
+				   a[j]=o2.a;
 			}
 			
-			if(itemsOrdered.get(i).getCost()==itemsOrdered.get(j).getCost())
-			if(itemsOrdered.get(i).getTitle().compareTo(itemsOrdered.get(j).getTitle())<0)
+			if(a[i].getCost()==a[j].getCost())
+			if(a[i].getTitle().compareTo(a[j].getTitle())<0)
 			{
 				
 				{
-					Wrapper o1=new Wrapper(itemsOrdered.get(i));
-					Wrapper o2=new Wrapper(itemsOrdered.get(j));
+					Wrapper o1=new Wrapper(a[i]);
+					Wrapper o2=new Wrapper(a[j]);
 				    swap(o1,o2);
-				    itemsOrdered.add(i,o1.a);
-					itemsOrdered.add(j,o2.a);
+				    a[i]=o1.a;
+					   a[j]=o2.a;
 				}
 			}
 		}
@@ -405,7 +515,6 @@ public void sortByCost()
 	if(h==0)
 	{
 		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc" ,"The disc is not found",JOptionPane.INFORMATION_MESSAGE);
-
 	}
 	
 }
@@ -426,7 +535,6 @@ public void search(DigitalVideoDisc[] sorted)
 	if(h==0)
 	{
 		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc number " +(j+1),"The disc is not found",JOptionPane.ERROR_MESSAGE);
-
 	}
 	
 	}
@@ -447,7 +555,6 @@ public void search(int a)
 	if(h==0)
 	{
 		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc" ,"The disc is not found",JOptionPane.ERROR_MESSAGE);
-
 	}
 	
 }
@@ -468,7 +575,6 @@ public void search(int[] sorted)
 	if(h==0)
 	{
 		JOptionPane. showMessageDialog(null,"Sorry,we couldn't find the disc Id " +sorted[j],"The disc is not found",JOptionPane.ERROR_MESSAGE);
-
 	}
 	
 	}
@@ -497,7 +603,6 @@ public void filterByTitle(String title)
 	{
 		JOptionPane.showMessageDialog(null,"Sorry,we couldn't find the disc you want ","The disc is not foun",JOptionPane.ERROR_MESSAGE);
 	}
-
 }
 public void filterById(int a)
 {
@@ -515,6 +620,7 @@ public void filterById(int a)
 	}
 }
 */
+/*
 public void print()
 {
 	
@@ -546,9 +652,12 @@ public void print()
 	}
 	
 }
+*/
 
-
-
+public void test()
+{
+	System.out.println(itemsOrdered.get(1) instanceof DigitalVideoDisc);
+}
 class Wrapper
 {
 	Media a;

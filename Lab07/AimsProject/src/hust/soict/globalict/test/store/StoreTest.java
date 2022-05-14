@@ -10,15 +10,15 @@ public class StoreTest {
 		// TODO Auto-generated method stub
 				Store anOrder = new Store();
 				DigitalVideoDisc dvd1= new DigitalVideoDisc("Harry","Animation","Roger Allers",87,19.95f);
-				anOrder.addDVD(dvd1);
+				//anOrder.addDVD(dvd1);
 				DigitalVideoDisc dvd2= new DigitalVideoDisc("Star Wars","Science Fiction","George Lucas",87,24.95f);
-				anOrder.addDVD(dvd2);
+				//anOrder.addDVD(dvd2);
 				DigitalVideoDisc dvd3= new DigitalVideoDisc("Aladin","Animation",18.99f);
-				anOrder.addDVD(dvd3);
+			//	anOrder.addDVD(dvd3);
 				DigitalVideoDisc dvd4= new DigitalVideoDisc("Harry Potter and the Half Blood Prince");
-				anOrder.addDVD(dvd4);
+			//	anOrder.addDVD(dvd4);
 				DigitalVideoDisc dvd5= new DigitalVideoDisc("Harry Potter and the Cup of Fire");
-				anOrder.addDVD(dvd5);
+			//	anOrder.addDVD(dvd5);
 				anOrder.showMenu();
 		
 			   

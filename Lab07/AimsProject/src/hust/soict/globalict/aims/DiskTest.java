@@ -17,11 +17,11 @@ public class DiskTest {
 		// System.out.println(dvd3.getId());
 	   // System.out.printf("Total Cost is %.2f\n",anOrder.totalCost());
 	    DigitalVideoDisc dvdlist[]= {dvd1,dvd2,dvd3};
-	   test.addDigitalVideoDisc(dvdlist);
+	  // test.addDigitalVideoDisc(dvdlist);
 	    //test.sortByCost(dvdlist);
 	    //test.sortByTitle(dvdlist);
 	   //test.removeDigitalVideoDisc(dvd3);
-	   test.filterByTitle("Harry Potter ");
+	  // test.filterByTitle("Harry Potter ");
 		
 
 	}

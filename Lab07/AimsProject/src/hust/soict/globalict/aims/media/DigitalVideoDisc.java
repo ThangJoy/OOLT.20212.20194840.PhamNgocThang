@@ -1,81 +1,42 @@
 package hust.soict.globalict.aims.media;
 import java.time.LocalDate;
-public class DigitalVideoDisc {
+
+import javax.swing.JOptionPane;
+public class DigitalVideoDisc extends Disc implements Playable {
 	
 	public DigitalVideoDisc() {
 		
 		super();
-		nbDigitalVideoDisc++;
-		this.id=nbDigitalVideoDisc;
+		nbMedia++;
+		this.id=nbMedia;
+	
 	}
 	public DigitalVideoDisc(String title) {
-		super();
-		this.title = title;
-		nbDigitalVideoDisc++;
-		this.id=nbDigitalVideoDisc;
+		super(title);
+		nbMedia++;
+		this.id=nbMedia;
+		
 	}
 	public DigitalVideoDisc(String title, String category, String director, float cost) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.director = director;
-		this.cost = cost;
-		nbDigitalVideoDisc++;
-		this.id=nbDigitalVideoDisc;
+		super(title,category,director,cost);
+		nbMedia++;
+		this.id=nbMedia;
+		
 		
 	}
 	public DigitalVideoDisc(String title, String category, float cost) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.cost = cost;
-		nbDigitalVideoDisc++;
-		this.id=nbDigitalVideoDisc;
+		super(title,category,cost);
+		nbMedia++;
+		this.id=nbMedia;
+
 	}
 	public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.director = director;
-		this.length = length;
-		this.cost = cost;
-		nbDigitalVideoDisc++;
-		this.id=nbDigitalVideoDisc;
+		super(title,category,director,length,cost);
+		nbMedia++;
+		this.id=nbMedia;
 	}
-	public String title;
-	public String category;
-	public String director;
-	public int length;
-	public float cost;
-	private LocalDate dateAdded=LocalDate.now();
-	private static int nbDigitalVideoDisc=0;
-	public int id;
-	public String getTitle() {
-		return title;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public String getDirector() {
-		return director;
-	}
-	public int getLength() {
-		return length;
-	}
-	public float getCost() {
-		return cost;
-		
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public int getId() {
-		return id;
-	}
-	public LocalDate getDateAdded() {
-		return dateAdded;
-	}
-	
+	private String director;
+	private int length;
 	public boolean isMatch(String title)
 	{
 		title= title.trim();
@@ -122,25 +83,17 @@ public class DigitalVideoDisc {
 		
 		
 	}
+	public void play()
+	{
+		JOptionPane.showMessageDialog(null, "Playing DVD: "+this.getTitle()+"\n"+"DVD length: "+this.getLength(),"DigitalVideoDisc",JOptionPane.INFORMATION_MESSAGE);
+	}
 	public String toString()
 	{
-		return "DVD - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+this.director+" - "+this.length+": "+this.cost+"$";
+		if(this.title.compareToIgnoreCase("exit")==0) return "EXIT";
+		else
+		return "DVD   - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+this.director+" - "+this.length+": "+this.cost+"$";
 	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public void setDirector(String director) {
-		this.director = director;
-	}
-	public void setLength(int length) {
-		this.length = length;
-	}
-	public void setCost(float cost) {
-		this.cost = cost;
-	}
-	public static void setNbDigitalVideoDisc(int nbDigitalVideoDisc) {
-		DigitalVideoDisc.nbDigitalVideoDisc = nbDigitalVideoDisc;
-	}
+	
 	
 
 }

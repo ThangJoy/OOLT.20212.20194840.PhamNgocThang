@@ -17,6 +17,7 @@ public class Store {
 	private static ArrayList<Media> itemsInStore = new ArrayList<Media>();
 	private static ArrayList<DigitalVideoDisc> itemsInStoreDvd = new ArrayList<DigitalVideoDisc>();
 	private static ArrayList<Book> itemsInStoreBook = new ArrayList<Book>();
+	private static ArrayList<CompactDisc> itemsInStoreCd = new ArrayList<CompactDisc>();
 	private static int nbItems=0;
 	static Cart anOrder= new Cart();
 	public static void addMedia(DigitalVideoDisc disc)
@@ -44,6 +45,20 @@ public class Store {
 		}else
 		{
 			 JOptionPane. showMessageDialog(null,"The book Id." +book.getId()+ " was not add to Cart","The Store is full",JOptionPane.ERROR_MESSAGE);
+
+	    } 
+	}
+	public static void addMedia(CompactDisc cd)
+	{
+		if (itemsInStore.size()<MAXIMUM)
+		{
+			itemsInStore.add(itemsInStore.size(),cd);
+			itemsInStoreCd.add(itemsInStoreCd.size(),cd);
+			JOptionPane. showMessageDialog(null,"The cd Id."+ cd.getId()+ " has been added successfully");
+			 
+		}else
+		{
+			 JOptionPane. showMessageDialog(null,"The cd Id." +cd.getId()+ " was not add to Cart","The Store is full",JOptionPane.ERROR_MESSAGE);
 
 	    } 
 	}
@@ -99,6 +114,33 @@ public class Store {
 		} else
 		{
 			JOptionPane. showMessageDialog(null,"The removing book doesn't appeared in Cart");
+		}
+	}
+	public static void removeMedia(CompactDisc cd)
+	{
+		int i,j,k=0;
+		for (i=0;i<itemsInStoreCd.size();i++)
+		{
+			if(itemsInStoreCd.get(i)==cd)
+			{
+				k=1;
+				itemsInStoreCd.remove(i);
+				for(j=0;j<itemsInStore.size();j++) {
+					if(itemsInStore.get(j)==cd)
+					{
+						itemsInStore.remove(j);
+						break;
+					}
+				}
+			    break;
+			}
+		}
+		if (k==1)
+		{
+		JOptionPane. showMessageDialog(null,"The cd Id."+ cd.getId()+ " has been successfully removed");
+		} else
+		{
+			JOptionPane. showMessageDialog(null,"The removing cd doesn't appeared in Cart");
 		}
 	}
 	public static void searchByMediaTitle(String title)
@@ -169,8 +211,8 @@ public class Store {
 		    	{
 		    	case 0:
 		    	{
-		            String[] option2 = {"0.Add Dvd","1.Add Book"};
-		            String[] option3 = {"0","1"};
+		            String[] option2 = {"0.Add Dvd","1.Add Book","2.Add Cd"};
+		            String[] option3 = {"0","1","2"};
 		            int choose1 = JOptionPane.showOptionDialog(null,option2,"Your choice",
 						      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 						        null, option3,null);
@@ -231,7 +273,7 @@ public class Store {
 		        		book.setCategory(s);
 		        		float b;
 		        		b=Float.parseFloat(JOptionPane.showInputDialog("Please enter the cost of the book"));
-		        		
+		        		book.setCost(b);
 		        		List<String> authors = new ArrayList<String>();
 		        		while(true)
 		        		{
@@ -239,7 +281,9 @@ public class Store {
 		        			s=JOptionPane.showInputDialog("Please enter the list of author(type Exit to leave)");
 		        			if (s.compareToIgnoreCase("exit")==0) break;
 		        			authors.add(s);
+		        		
 		        	    }
+		        		
 		        		book.setAuthors(authors);
 		                int option4=JOptionPane.showConfirmDialog(null, "Do you want to add content for the book?");
 		        		if(option4==JOptionPane.YES_OPTION)
@@ -256,38 +300,71 @@ public class Store {
 		        			
 		        			if(itemsInStoreBook.get(i).getCost()==book.getCost())
 		        			{
-		        			if(itemsInStoreBook.get(i).getContentLength().compareToIgnoreCase(book.getContentLength())==0)
-		        			{
+		        			
 		        				if(authors.size()==itemsInStoreBook.get(i).getAuthors().size())
 		        				{
-		        					
+		        					int f=0;
 		        			     for(int g=0;g<authors.size();g++)
 		        			     {
-		        			    	 int f=0;
+		        			    	
 		        			    	 for(int j=0;j<authors.size();j++)
 		        			    	 {
 		        			    		 
 		        			    	 if(authors.get(g).compareToIgnoreCase(itemsInStoreBook.get(i).getAuthors().get(j))==0)
 		        			    	 {
 		        			    		 f++;
+		        			    		 break;
 		        			    	 }
-		        			    	 else break;
+		        			    	
 		        			    	 }
+		        			     }
 		        			    	 if (f==authors.size())
 		        			    	 {
 		        			    		 k=1;
 		        			    		 break;
 		        			    	 }
-		        			     }
+		        			     
 		        				}
-		        			}
+		        				if(k==1)
+		        				{
+		        				if((book.getContentLength()==null)&&(itemsInStoreBook.get(i).getContentLength()!=null)) k=0;
+		        				if((book.getContentLength()!=null)&&(itemsInStoreBook.get(i).getContentLength()==null)) k=0;
+		        				if((book.getContentLength()!=null)&&(itemsInStoreBook.get(i).getContentLength()!=null))
+		        				{
+		        					String s1=book.getContentLength();
+		        					
+		        					String s2=itemsInStoreBook.get(i).getContentLength();
+		        		
+		        					for(int j=0;j<s1.length();j++)
+		        					{
+		        						if(Character.isLetter(s1.charAt(j))==false)
+		        						{
+		        							s1=s1.substring(0,j)+s1.substring(j+1);
+		        						}
+		        					}
+		        					for(int j=0;j<s2.length();j++)
+		        					{
+		        						if(Character.isLetter(s2.charAt(j))==false)
+		        						{
+		        							s2=s2.substring(0,j)+s2.substring(j+1);
+		        						}
+		        					}
+		        					
+		        					if(s1.compareToIgnoreCase(s2)!=0) k=0;
+		        				}
+		        				}
+		        					
+		        			
 		        			}
 		        			}
 		        			}
 		        			if (k==1) break;
 		        			    	 
 		        		}
-		        		if(k==0) addMedia(book);
+		        		if(k==0) 
+		        			{
+		        			addMedia(book);
+		        			}
 		        		if(k==1) 
 		        			{
 		        			JOptionPane.showMessageDialog(null,"The book is already exist","Please try again",JOptionPane.ERROR_MESSAGE);
@@ -297,16 +374,103 @@ public class Store {
 		        		
 		            }
 		            break;
-		       
+		            case 2:
+		            {
+		            	String s=new String();
+		        		CompactDisc disc= new CompactDisc();
+		        		s=JOptionPane.showInputDialog("Please enter the title of the Cd");
+		        		disc.setTitle(s);
+
+		        		s=JOptionPane.showInputDialog("Please enter the artist of the Cd");
+		        		disc.setArtist(s);
+		        		float b;
+		        		b=Float.parseFloat(JOptionPane.showInputDialog("Please enter the cost of the Cd"));
+		        		disc.setCost(b);
+		        		int q=1;int a;
+		        		ArrayList<Track> tracks = new ArrayList<Track>();
+		        		while(true)
+		        		{
+		                Track track = new Track();
+		        			
+		        			s=JOptionPane.showInputDialog("Please enter the title for track No."+q+ "(type Exit to leave)");
+		        			if (s.compareToIgnoreCase("exit")==0) break;
+		        			track.setTitle(s);
+		        			a=Integer.parseInt(JOptionPane.showInputDialog("Please enter the length for track No."+q+ "(type -1 to leave)"));
+		        			if(a==-1) break;
+		        			track.setLength(a);
+		        			tracks.add(track);
+		        			q++;
+		        		
+		        	    }
+		        		
+		        		disc.setTracks(tracks);
+		        		
+		        		int k=0;
+		        		for(int i=0;i<itemsInStoreCd.size();i++)
+		        		{
+		        			if(itemsInStoreCd.get(i).getTitle().compareToIgnoreCase(disc.getTitle())==0)
+		        			{
+		        			
+		        			
+		        			if(itemsInStoreCd.get(i).getArtist().compareToIgnoreCase(disc.getArtist())==0)
+		        			{
+		        			if(itemsInStoreCd.get(i).getLength()==disc.getLength())
+		        			{
+		        				
+		        			if(itemsInStoreCd.get(i).getCost()==disc.getCost())
+		        			{
+		        				
+		        			if(itemsInStoreCd.get(i).getTracks().size()==disc.getTracks().size())
+		        			{
+		        				int f=0;
+		                       for(int j=0;j<itemsInStoreCd.get(i).getTracks().size();j++)
+                              {
+		                    	  
+	                           for(int e=0;e<disc.getTracks().size();e++)
+	                           {
+	                        	   
+	                        	   if (itemsInStoreCd.get(i).getTracks().get(j).getTitle().compareToIgnoreCase(disc.getTracks().get(e).getTitle())==0)
+	                        	   {
+	                        		   if(itemsInStoreCd.get(i).getTracks().get(j).getLength()==disc.getTracks().get(e).getLength())
+	                        		   {
+	                        			   f++;
+	                        			   break;
+	                        		   }
+	                        	   }
+	                           }
+                              }
+	                          
+	                           if(f==disc.getTracks().size())
+	                           {
+	                        	   k=1;
+	                        	   break;
+	                           }
+                              }
+		        			}}}}
+		        			if (k==1) break;
+		        		 }
+		        		if(k==0) 
+	        			{
+	        			addMedia(disc);
+	        			}
+	        		if(k==1) 
+	        			{
+	        			JOptionPane.showMessageDialog(null,"The cd is already exist","Please try again",JOptionPane.ERROR_MESSAGE);
+	        			disc.setNbMedia(disc.getId()-1);
+	        			}
+		        		
+		            }
+		            break;
 		    	 default :break;
 		            }
+		            if(l==1) break;
 		    		
 		    	}
 		    	break;
 		    	case 1:
 		    	{
-		    		 String[] option2 = {"0.Remove Dvd","1.Remove Book"};
-			         String[] option3 = {"0","1"};
+		    		 String[] option2 = {"0.Remove Dvd","1.Remove Book","2.Remove Cd"};
+			         String[] option3 = {"0","1","2"};
 			         int choose1 = JOptionPane.showOptionDialog(null,option2,"Your choice",
 						      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 						        null, option3,null);
@@ -345,6 +509,22 @@ public class Store {
 			        	
 			         }
 			         break;
+			         case 2:
+			         {
+			        	 CompactDisc[] arr= new CompactDisc[itemsInStoreCd.size()];
+			        	 itemsInStoreCd.toArray(arr);
+			        	 JOptionPane. showMessageDialog(null,arr,"Here's the list of cd",JOptionPane.INFORMATION_MESSAGE);
+				     		JList<CompactDisc> jlist = new JList<CompactDisc>(arr);
+				     		
+				     		JOptionPane.showMessageDialog(null,jlist,"Please choose one/multiple cds you wanna remove",JOptionPane.PLAIN_MESSAGE);
+				     		int[] value = jlist.getSelectedIndices();
+				     				for (int i=0;i<value.length;i++)
+				     				{
+				     					removeMedia(itemsInStoreCd.get(value[i]));
+				     				}
+			        	 
+			         }
+			         break;
 			         default:break;
 			         }
 		    		 
@@ -381,6 +561,102 @@ public class Store {
 	   
 
 	}
+	public static void seeListOfMedia()
+	{
+		Media[] arr= new Media[itemsInStore.size()+1];
+		int q= arr.length-1;
+   	 itemsInStore.toArray(arr);
+   	
+   	 DigitalVideoDisc dvd1=new DigitalVideoDisc("Exit");
+   	 dvd1.setNbMedia(dvd1.getId()-1);
+   
+   	 JOptionPane. showMessageDialog(null,arr,"Here's the list of Media",JOptionPane.INFORMATION_MESSAGE);
+    		JList<Media> jlist = new JList<Media>(arr);
+    while(true)
+    {
+    	int k=0;
+   	 arr[q]=dvd1;
+    		JOptionPane.showMessageDialog(null,jlist,"Click to see detail/Scroll down to click to exit",JOptionPane.PLAIN_MESSAGE);
+    		int[] value = jlist.getSelectedIndices();
+    				for (int i=0;i<value.length;i++)
+    				{
+    					if(value[i]==q) 
+    					{
+    						k=1;
+    						break;
+    					}
+    					if(itemsInStore.get(value[i]) instanceof DigitalVideoDisc )
+    					{
+    						for(int j=0;j<itemsInStoreDvd.size();j++)
+    						{
+    							if (itemsInStoreDvd.get(j).getId()==itemsInStore.get(value[i]).getId())
+    							{
+    								itemsInStoreDvd.get(j).play();
+    							}
+    						}
+    					}
+    					if(itemsInStore.get(value[i]) instanceof Disc )
+    					{
+    						for(int j=0;j<itemsInStoreCd.size();j++)
+    						{
+    							if (itemsInStoreCd.get(j).getId()==itemsInStore.get(value[i]).getId())
+    							{
+    								itemsInStoreCd.get(j).play();
+    							}
+    						}
+    					}
+    				}
+    				if(k==1) break;
+    }
+	}
+	public static void seeListOfMediaInCart()
+	{
+		Media[] arr= new Media[anOrder.getMedia1().size()+1];
+		int q= arr.length-1;
+		anOrder.getMedia1().toArray(arr);
+   	
+   	 DigitalVideoDisc dvd1=new DigitalVideoDisc("Exit");
+   	 dvd1.setNbMedia(dvd1.getId()-1);
+   	 
+   	 JOptionPane. showMessageDialog(null,arr,"Here's the list of Media in Cart",JOptionPane.INFORMATION_MESSAGE);
+    		JList<Media> jlist = new JList<Media>(arr);
+    while(true)
+    {
+    	int k=0;
+    	arr[q]=dvd1;
+    		JOptionPane.showMessageDialog(null,jlist,"Click to see detail/Scroll down to click to exit",JOptionPane.PLAIN_MESSAGE);
+    		int[] value = jlist.getSelectedIndices();
+    				for (int i=0;i<value.length;i++)
+    				{
+    					if(value[i]==q) 
+    					{
+    						k=1;
+    						break;
+    					}
+    					if(anOrder.getMedia1().get(value[i]) instanceof DigitalVideoDisc )
+    					{
+    						for(int j=0;j<anOrder.getDvd1().size();j++)
+    						{
+    							if (anOrder.getDvd1().get(j).getId()==anOrder.getMedia1().get(value[i]).getId())
+    							{
+    								anOrder.getDvd1().get(j).play();
+    							}
+    						}
+    					}
+    					if(anOrder.getMedia1().get(value[i]) instanceof Disc )
+    					{
+    						for(int j=0;j<anOrder.getCd1().size();j++)
+    						{
+    							if (anOrder.getCd1().get(j).getId()==anOrder.getMedia1().get(value[i]).getId())
+    							{
+    								anOrder.getCd1().get(j).play();
+    							}
+    						}
+    					}
+    				}
+    				if(k==1) break;
+    }
+	}
 	public static void storeMenu() 
 	{ 
 	   /* System.out.println("Options: ");
@@ -394,8 +670,8 @@ public class Store {
 		while(true)
 		{
 			int l=0;
-		String[] display = new String[] {"--------------------------------","1. See a Media’s details","2. Add a Media to cart","3. See current cart","0. Back","--------------------------------","Please choose a number: 0-1-2-3"};
-	    String[] options = new String[] {"0", "1", "2", "3"};
+		String[] display = new String[] {"--------------------------------","1. See a Media’s details","2. Add a Media to cart","3. See current cart","4. See list of media in Store","0. Back","--------------------------------","Please choose a number: 0-1-2-3"};
+	    String[] options = new String[] {"0", "1", "2", "3","4"};
 	    int response = JOptionPane.showOptionDialog(null,display,"Options",
 	      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 	        null, options,null);
@@ -413,8 +689,8 @@ public class Store {
 	    	break;
 	    case 2:
 	    {
-	    	String[] option2 = {"0.Add Dvd","1.Add Book"};
-            String[] option3 = {"0","1"};
+	    	String[] option2 = {"0.Add Dvd","1.Add Book","2.Add Cd"};
+            String[] option3 = {"0","1","2"};
             int choose1 = JOptionPane.showOptionDialog(null,option2,"Your choice",
 				      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 				        null, option3,null);
@@ -442,6 +718,7 @@ public class Store {
 			
 			if(k==1)
 			{
+				
 				anOrder.addMedia(nbMatch[0]);
 				JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Medias in the current cart",JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -463,7 +740,7 @@ public class Store {
 						
 						anOrder.addMedia(nbMatch[i]);
 					}
-					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of DVDs in the current cart",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Medias in the current cart",JOptionPane.INFORMATION_MESSAGE);
 				}
 				break;
 				case 0:
@@ -476,7 +753,7 @@ public class Store {
 							{
 								anOrder.addMedia(nbMatch[value[i]]);
 							}
-					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of DVDs in the current cart",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Medias in the current cart",JOptionPane.INFORMATION_MESSAGE);
 							
 				}
 				break;
@@ -531,7 +808,7 @@ public class Store {
     						
     						anOrder.addMedia(nbMatch[i]);
     					}
-    					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Books in the current cart",JOptionPane.INFORMATION_MESSAGE);
+    					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Medias in the current cart",JOptionPane.INFORMATION_MESSAGE);
     				}
     				break;
     				case 0:
@@ -544,7 +821,7 @@ public class Store {
     							{
     								anOrder.addMedia(nbMatch[value[i]]);
     							}
-    					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Books in the current cart",JOptionPane.INFORMATION_MESSAGE);
+    					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Media in the current cart",JOptionPane.INFORMATION_MESSAGE);
     							
     				}
     				break;
@@ -558,6 +835,73 @@ public class Store {
     	    	
             }
             break;
+            case 2:
+            {
+            	CompactDisc[] a = new CompactDisc[itemsInStoreCd.size()];
+            	itemsInStoreCd.toArray(a);
+            	JOptionPane. showMessageDialog(null,a,"Here is the list of cds in Store",JOptionPane.INFORMATION_MESSAGE);
+    	    	String title=JOptionPane.showInputDialog("Please enter the title of the cds you wannna add");
+    	    	int k=0;
+    			ArrayList<CompactDisc> nbMatch1=new ArrayList<CompactDisc>();
+    			for(int i=0;i<itemsInStoreCd.size();i++)
+    			{
+    				if(itemsInStoreCd.get(i).isMatch(title))
+    				{
+    					nbMatch1.add(itemsInStoreCd.get(i));
+    					k++;
+    				}
+    			}
+    			CompactDisc[] nbMatch = new CompactDisc[nbMatch1.size()];
+    			nbMatch1.toArray(nbMatch);
+    			
+    			if(k==1)
+    			{
+    				anOrder.addMedia(nbMatch[0]);
+    				JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Medias in the current cart",JOptionPane.INFORMATION_MESSAGE);
+    			}
+    			if(k>1)
+    			{
+    				JOptionPane. showMessageDialog(null,nbMatch,"Here's the list of matching cds",JOptionPane.INFORMATION_MESSAGE);
+    				String[] option = {"0.Add by myself","1.Add all"};
+    				String[] option1 = {"0","1"};
+    				int choose = JOptionPane.showOptionDialog(null,option,"Your choise",
+    					      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
+    					        null, option1,null);
+    				switch(choose)
+    				{
+    				case 1:
+    				{
+    					for(int i=0;i<k;i++)
+    					{
+    						
+    						anOrder.addMedia(nbMatch[i]);
+    					}
+    					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Medias in the current cart",JOptionPane.INFORMATION_MESSAGE);
+    				}
+    				break;
+    				case 0:
+    				{
+    					JOptionPane. showMessageDialog(null,nbMatch,"Here's the list of matching cds",JOptionPane.INFORMATION_MESSAGE);
+    					JList<CompactDisc> jlist = new JList<CompactDisc>(nbMatch);
+    					JOptionPane.showMessageDialog(null,jlist,"Please choose one/multiple cds you wanna add",JOptionPane.PLAIN_MESSAGE);
+    					int[] value = jlist.getSelectedIndices();
+    							for (int i=0;i<value.length;i++)
+    							{
+    								anOrder.addMedia(nbMatch[value[i]]);
+    							}
+    					JOptionPane. showMessageDialog(null,anOrder.getnbOrder(),"The number of Medias in the current cart",JOptionPane.INFORMATION_MESSAGE);
+    							
+    				}
+    				break;
+    				default:break;
+    				}
+    			}
+    			if(k==0) 
+    			{
+    				JOptionPane.showMessageDialog(null,"Sorry,we couldn't find the cd you want ","The cd is not found",JOptionPane.ERROR_MESSAGE);
+    			}
+            }
+            break;
            default:break;
             }
             }
@@ -565,6 +909,11 @@ public class Store {
 	    case 3: 
 	    {
 	    	cartMenu();
+	    }
+	    break;
+	    case 4:
+	    {
+	    	seeListOfMedia();
 	    }
 	    break;
 	    default:break;
@@ -587,11 +936,11 @@ public class Store {
 	System.out.println("Please choose a number: 0-1-2-3-4");*/
 		while(true)
 		{
-			Media b= new Media();
+			Media b=new Book();
 		
 			int l=0;
-		String[] display = new String[] {"--------------------------------","1. Filter Medias in cart","2. Sort Medias in cart","3. Remove Media from cart","4.Get a lucky item from cart","5. Place order","0. Back","--------------------------------","Please choose a number: 0-1-2-3-4-5"};
-	    String[] options = new String[] {"0", "1", "2", "3","4","5"};
+		String[] display = new String[] {"--------------------------------","1. Filter Medias in cart","2. Sort Medias in cart","3. Remove Media from cart","4. Get a lucky item from cart","5. See list of media in Cart","6. Place order","0. Back","--------------------------------","Please choose a number: 0-1-2-3-4-5"};
+	    String[] options = new String[] {"0", "1", "2", "3","4","5","6"};
 	    int response = JOptionPane.showOptionDialog(null,display,"Options:",
 	      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 	        null, options,null);	
@@ -606,8 +955,8 @@ public class Store {
 	    break;
 	    case 1:
 	    {
-	    	String[] filter= {"0.Filter Dvd","1.Filter Book"};
-	    	String[] option= {"0","1"};
+	    	String[] filter= {"0.Filter Dvd","1.Filter Book","2.Filter Cd"};
+	    	String[] option= {"0","1","2"};
 	    	int response1 = JOptionPane.showOptionDialog(null,filter,"Options:",
 	    		      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 	    		        null, option,null);	
@@ -623,6 +972,11 @@ public class Store {
 	    		
 		    	
 	    		JOptionPane.showMessageDialog(null,anOrder.getBook(),"Here is the list of Book in Cart",JOptionPane.INFORMATION_MESSAGE);
+	    	}
+	    	break;
+	    	case 2:
+	    	{
+	    		JOptionPane.showMessageDialog(null,anOrder.getCd(),"Here is the list of Cd in Cart",JOptionPane.INFORMATION_MESSAGE);
 	    	}
 	    	break;
 	    	default:break;
@@ -667,19 +1021,36 @@ public class Store {
 						anOrder.removeMedia(anOrder.getMedia()[value[i]]);
 					}
 					
-		b=anOrder.getALuckyItem();
 	    }
 	    break;
 	    case 4:
 	    {
+	    	if(anOrder.getnbOrder()==0)
+	    	{
+	    		JOptionPane.showMessageDialog(null,"There is nothing to choose,Your Cart is empty","Fill your Cart some items",JOptionPane.ERROR_MESSAGE);
+	    	}
+	    	else
+	    	{
 	    	q=1;
 	    	b=anOrder.getALuckyItem();
 	    	JOptionPane.showMessageDialog(null,b,"You get a lucky item",JOptionPane.INFORMATION_MESSAGE);
+	    	}
 	    }
 	   
 	    break;
 	    case 5:
 	    {
+	    	seeListOfMediaInCart();
+	    }
+	    break;
+	    case 6:
+	    {
+	    	if(anOrder.getnbOrder()==0)
+	    	{
+	    		JOptionPane.showMessageDialog(null,"There is nothing to place order,Your Cart is empty","Fill your Cart some items",JOptionPane.ERROR_MESSAGE);
+	    	}
+	    	else
+	    	{
 	    	if(q==0)
 	    	{
 	    		b=anOrder.getALuckyItem();
@@ -688,6 +1059,7 @@ public class Store {
 	    	anOrder.sortByTitle();
 	    	JOptionPane.showMessageDialog(null,anOrder.getMedia(),"Total cost "+ anOrder.totalCost(b),JOptionPane.INFORMATION_MESSAGE);
 	    	anOrder=new Cart();
+	    	}
 	    }
 	    break;
 	    default:break;
@@ -695,6 +1067,10 @@ public class Store {
 	if (l==1) break;
 	}
 }
+	public void test()
+	{
+		System.out.println(itemsInStore.get(6) instanceof Disc);
+	}	
 static class Wrapper
 	{
 		DigitalVideoDisc a;
