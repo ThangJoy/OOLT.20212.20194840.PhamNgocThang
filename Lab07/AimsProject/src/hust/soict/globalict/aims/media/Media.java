@@ -9,11 +9,13 @@ public Media(String title, String category) {
 		super();
 		this.title = title;
 		this.category = category;
+		dateAdded=LocalDate.now();
 	}
 
 public Media(String title) {
 		super();
 		this.title = title;
+		dateAdded=LocalDate.now();
 	}
 
 public Media(String title, String category, float cost) {
@@ -21,15 +23,17 @@ public Media(String title, String category, float cost) {
 		this.title = title;
 		this.category = category;
 		this.cost = cost;
+		dateAdded=LocalDate.now();
 	}
 protected int id;
 protected String title;
 protected String category;
 protected float cost;
 protected static int nbMedia=0;
-protected LocalDate dateAdded=LocalDate.now();
+protected LocalDate dateAdded;
 	public Media() {
 		// TODO Auto-generated constructor stub
+		dateAdded=LocalDate.now();
 	}
 	
 	public int getId() {

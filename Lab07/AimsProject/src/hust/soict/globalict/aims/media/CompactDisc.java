@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class CompactDisc extends Disc implements Playable {
+public class CompactDisc extends Disc implements Playable,Cloneable {
 
 	public CompactDisc(String title, String category) {
 		super(title, category);
@@ -47,6 +47,7 @@ public class CompactDisc extends Disc implements Playable {
 		this.id=nbMedia;
 		// TODO Auto-generated constructor stub
 	}
+	private int nbTrack=0;
 private String artist;
 private ArrayList<Track> tracks = new ArrayList<Track>();
 public void addTrack(Track track)
@@ -68,6 +69,7 @@ public void addTrack(Track track)
 	if(k==0)
 	{
 		tracks.add(tracks.size(),track);
+		this.nbTrack++;
 		JOptionPane.showMessageDialog(null,"The track is successfully added","Done",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -152,9 +154,26 @@ public String toString()
 		a.append(this.tracks.get(i).getLength());
 		a.append(',');
 	}
-	
+	a.deleteCharAt(a.length()-1);
 	return "CD    - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+this.artist+"-"+a.toString()+"\n"+
 " - "+this.getLength()+" : "+this.cost+"$";
 	
+}
+
+public int getNbTrack() {
+	return nbTrack;
+}
+public CompactDisc copy()
+{
+	try {
+		return (CompactDisc)this.clone();
+	} catch (CloneNotSupportedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+}
+public void setNbTrack(int nbTrack) {
+	this.nbTrack = nbTrack;
 }
 }

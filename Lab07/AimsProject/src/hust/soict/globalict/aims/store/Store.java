@@ -211,8 +211,8 @@ public class Store {
 		    	{
 		    	case 0:
 		    	{
-		            String[] option2 = {"0.Add Dvd","1.Add Book","2.Add Cd"};
-		            String[] option3 = {"0","1","2"};
+		            String[] option2 = {"0.Add Dvd","1.Add Book","2.Add Cd","3.Add Track to current CD in Store"};
+		            String[] option3 = {"0","1","2","3"};
 		            int choose1 = JOptionPane.showOptionDialog(null,option2,"Your choice",
 						      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 						        null, option3,null);
@@ -386,20 +386,21 @@ public class Store {
 		        		float b;
 		        		b=Float.parseFloat(JOptionPane.showInputDialog("Please enter the cost of the Cd"));
 		        		disc.setCost(b);
-		        		int q=1;int a;
+		        		int a;
 		        		ArrayList<Track> tracks = new ArrayList<Track>();
 		        		while(true)
 		        		{
 		                Track track = new Track();
 		        			
-		        			s=JOptionPane.showInputDialog("Please enter the title for track No."+q+ "(type Exit to leave)");
+		        			s=JOptionPane.showInputDialog("Please enter the title for track No."+(disc.getNbTrack()+1)+ "(type Exit to leave)");
 		        			if (s.compareToIgnoreCase("exit")==0) break;
 		        			track.setTitle(s);
-		        			a=Integer.parseInt(JOptionPane.showInputDialog("Please enter the length for track No."+q+ "(type -1 to leave)"));
+		        			a=Integer.parseInt(JOptionPane.showInputDialog("Please enter the length for track No."+(disc.getNbTrack()+1)+ "(type -1 to leave)"));
 		        			if(a==-1) break;
 		        			track.setLength(a);
-		        			tracks.add(track);
-		        			q++;
+		        			disc.setTracks(tracks);
+		        		    disc.addTrack(track);
+		        			
 		        		
 		        	    }
 		        		
@@ -461,6 +462,32 @@ public class Store {
 		        		
 		            }
 		            break;
+		            case 3:
+		            {
+                     if(itemsInStoreCd.size()>0)
+{  
+	
+		            	CompactDisc[] a = new CompactDisc[itemsInStoreCd.size()];
+		            	itemsInStoreCd.toArray(a);
+		            	
+						JList<CompactDisc> jlist = new JList<CompactDisc>(a);
+						JOptionPane.showMessageDialog(null,jlist,"Please choose one cd you wanna add track in",JOptionPane.PLAIN_MESSAGE);
+						int[] value = jlist.getSelectedIndices();
+						
+						String s;
+						s=JOptionPane.showInputDialog("Please enter the title of the track");
+						int b;
+						b=Integer.parseInt(JOptionPane.showInputDialog("Please enter the length of the Cd"));
+						Track c = new Track(s,b);
+						itemsInStoreCd.get(value[0]).addTrack(c);
+}
+                     else
+                     {
+                    	 JOptionPane.showMessageDialog(null,"Haven't any CD in Store","Oops",JOptionPane.ERROR_MESSAGE);
+                     }
+						
+		            }
+		            break;
 		    	 default :break;
 		            }
 		            if(l==1) break;
@@ -469,8 +496,8 @@ public class Store {
 		    	break;
 		    	case 1:
 		    	{
-		    		 String[] option2 = {"0.Remove Dvd","1.Remove Book","2.Remove Cd"};
-			         String[] option3 = {"0","1","2"};
+		    		 String[] option2 = {"0.Remove Dvd","1.Remove Book","2.Remove Cd","3.Remove Track form current CD in Store"};
+			         String[] option3 = {"0","1","2","3"};
 			         int choose1 = JOptionPane.showOptionDialog(null,option2,"Your choice",
 						      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 						        null, option3,null);
@@ -523,6 +550,39 @@ public class Store {
 				     					removeMedia(itemsInStoreCd.get(value[i]));
 				     				}
 			        	 
+			         }
+			         break;
+			         case 3:
+			         {
+			        	 if(itemsInStoreCd.size()>0)
+			        	 {
+			        		 
+			        	 
+			        	 CompactDisc[] arr= new CompactDisc[itemsInStoreCd.size()];
+			        	 itemsInStoreCd.toArray(arr);
+			        	 
+				     		JList<CompactDisc> jlist = new JList<CompactDisc>(arr);
+				     		
+				     		JOptionPane.showMessageDialog(null,jlist,"Please choose cd you wanna remove track out",JOptionPane.PLAIN_MESSAGE);
+				     		int[] value = jlist.getSelectedIndices();
+				     		
+				     	Track[] arr1 = new Track[itemsInStoreCd.get(value[0]).getTracks().size()];
+				     	itemsInStoreCd.get(value[0]).getTracks().toArray(arr1);
+				     	
+				     	JList<Track> jlist1 = new JList<Track>(arr1);
+				     	JOptionPane.showMessageDialog(null,jlist1,"Please choose track you wanna remove out",JOptionPane.PLAIN_MESSAGE);
+			     		int[] value1 = jlist1.getSelectedIndices();
+			     		
+			     		for(int i=0;i<value1.length;i++)
+			     		{
+			     			itemsInStoreCd.get(value[0]).removeTrack(itemsInStoreCd.get(value[0]).getTracks().get(value1[i]));
+			     		}
+				     	
+			          }	else
+			          {
+			        	  JOptionPane.showMessageDialog(null, "Haven't any CD in Store yet","Oops",JOptionPane.ERROR_MESSAGE);
+			          }
+				     		
 			         }
 			         break;
 			         default:break;
@@ -902,6 +962,7 @@ public class Store {
     			}
             }
             break;
+         
            default:break;
             }
             }
@@ -939,8 +1000,8 @@ public class Store {
 			Media b=new Book();
 		
 			int l=0;
-		String[] display = new String[] {"--------------------------------","1. Filter Medias in cart","2. Sort Medias in cart","3. Remove Media from cart","4. Get a lucky item from cart","5. See list of media in Cart","6. Place order","0. Back","--------------------------------","Please choose a number: 0-1-2-3-4-5"};
-	    String[] options = new String[] {"0", "1", "2", "3","4","5","6"};
+		String[] display = new String[] {"--------------------------------","1. Filter Medias in cart","2. Sort Medias in cart","3. Remove Media from cart","4.Remove Tracks from CD in Cart","5.Add Tracks to CD in Cart","6. Get a lucky item from cart","7. See list of media in Cart","8. Place order","0. Back","--------------------------------","Please choose a number: 0-1-2-3-4-5"};
+	    String[] options = new String[] {"0", "1", "2", "3","4","5","6","7","8"};
 	    int response = JOptionPane.showOptionDialog(null,display,"Options:",
 	      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 	        null, options,null);	
@@ -1025,6 +1086,72 @@ public class Store {
 	    break;
 	    case 4:
 	    {
+	    	if(anOrder.getCd1().size()>0)
+	    	{
+	    	 CompactDisc[] arr= new CompactDisc[anOrder.getCd1().size()];
+        	 anOrder.getCd1().toArray(arr);
+        	 
+	     		JList<CompactDisc> jlist = new JList<CompactDisc>(arr);
+	     		
+	     		JOptionPane.showMessageDialog(null,jlist,"Please choose cd you wanna remove track out",JOptionPane.PLAIN_MESSAGE);
+	     		int[] value = jlist.getSelectedIndices();
+	     		
+	     	Track[] arr1 = new Track[ anOrder.getCd1().get(value[0]).getTracks().size()];
+	     	anOrder.getCd1().get(value[0]).getTracks().toArray(arr1);
+	     	
+	     	JList<Track> jlist1 = new JList<Track>(arr1);
+	     	JOptionPane.showMessageDialog(null,jlist1,"Please choose track you wanna remove out",JOptionPane.PLAIN_MESSAGE);
+     		int[] value1 = jlist1.getSelectedIndices();
+     		
+     		for(int i=0;i<value1.length;i++)
+     		{
+     		 anOrder.removeTrack(anOrder.getCd1().get(value[0]).getTracks().get(value1[i]),anOrder.getCd1().get(value[0]));
+     		}
+	    	}
+	    	else 
+	    	{
+	    		JOptionPane.showMessageDialog(null,"Your Cart is empty","Oops",JOptionPane.ERROR_MESSAGE);
+	    	}
+	     	
+	    }
+	    break;
+	    case 5:
+	    {
+	    	if(anOrder.getCd1().size()>0)
+	    	{
+	    		int w=0;
+	    	CompactDisc[] a = new CompactDisc[anOrder.getCd1().size()];
+        	anOrder.getCd1().toArray(a);
+        	
+			JList<CompactDisc> jlist = new JList<CompactDisc>(a);
+			JOptionPane.showMessageDialog(null,jlist,"Please choose one cd you wanna add track in",JOptionPane.PLAIN_MESSAGE);
+			int[] value=jlist.getSelectedIndices();
+			for(int i=0;i<value.length;i++)
+			{
+			 if(itemsInStoreCd.get(i).getId()==anOrder.getCd1().get(value[0]).getId())
+			 {
+				w=i;
+				break;
+			 }
+			}
+			Track[] c = new Track[itemsInStoreCd.get(w).getTracks().size()];
+			itemsInStoreCd.get(w).getTracks().toArray(c);
+			JList<Track> jlist1 = new JList<Track>(c);
+			JOptionPane.showMessageDialog(null,jlist1,"Please choose one/multiple tracks you wanna add in Cd "+itemsInStoreCd.get(value[0]).getTitle(),JOptionPane.PLAIN_MESSAGE);
+			int[] value1 = jlist1.getSelectedIndices();
+			for(int i=0;i<value1.length;i++)
+			{
+				anOrder.addTrack(itemsInStoreCd.get(w).getTracks().get(value1[i]),anOrder.getCd1().get(value[0]));
+			}
+	    	}
+	    	else
+	    	{
+	    		JOptionPane.showMessageDialog(null,"Your Cart is empty","Oops",JOptionPane.ERROR_MESSAGE);
+	    	}
+	    }
+	    break;
+	    case 6:
+	    {
 	    	if(anOrder.getnbOrder()==0)
 	    	{
 	    		JOptionPane.showMessageDialog(null,"There is nothing to choose,Your Cart is empty","Fill your Cart some items",JOptionPane.ERROR_MESSAGE);
@@ -1038,12 +1165,12 @@ public class Store {
 	    }
 	   
 	    break;
-	    case 5:
+	    case 7:
 	    {
 	    	seeListOfMediaInCart();
 	    }
 	    break;
-	    case 6:
+	    case 8:
 	    {
 	    	if(anOrder.getnbOrder()==0)
 	    	{

@@ -38,4 +38,8 @@ public void play()
 {
 	JOptionPane.showMessageDialog(null, "Playing CD: "+this.getTitle()+"\n"+"CD length: "+this.getLength(),"CompactDisc",JOptionPane.INFORMATION_MESSAGE);
 }
+public String toString()
+{
+	return "TRACK - "+"Title: "+this.title+" Length: "+this.length;
+}
 }

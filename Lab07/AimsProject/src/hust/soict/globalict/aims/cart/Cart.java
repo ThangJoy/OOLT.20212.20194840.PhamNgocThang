@@ -171,6 +171,7 @@ public void addMedia(CompactDisc cd)
 	}
 	if(k==0) 
 	{
+		
 		if (itemsOrdered.size()<MAX_NUMBER_ORDERED)
 		{
 			
@@ -186,7 +187,14 @@ public void addMedia(CompactDisc cd)
 	    } 
 	}
 }
-
+public void addTrack(Track track,CompactDisc cd)
+{
+	cd.addTrack(track);
+}
+public void removeTrack(Track track,CompactDisc cd)
+{
+	cd.removeTrack(track);
+}
 /*public void addDigitalVideoDisc(DigitalVideoDisc[] dvdlist)
 {
 	    int i;
