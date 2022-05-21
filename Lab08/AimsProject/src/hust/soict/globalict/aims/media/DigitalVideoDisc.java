@@ -35,8 +35,7 @@ public class DigitalVideoDisc extends Disc implements Playable {
 		nbMedia++;
 		this.id=nbMedia;
 	}
-	private String director;
-	private int length;
+
 	public boolean isMatch(String title)
 	{
 		title= title.trim();

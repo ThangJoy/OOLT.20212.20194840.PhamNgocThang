@@ -2,7 +2,7 @@ package hust.soict.globalict.aims.media;
 
 import javax.swing.JOptionPane;
 
-public class Track implements Playable{
+public class Track implements Playable,Comparable<Track>{
 
 	public Track(String title, int length) {
 		super();
@@ -41,5 +41,30 @@ public void play()
 public String toString()
 {
 	return "TRACK - "+"Title: "+this.title+" Length: "+this.length;
+}
+public boolean equals(Track obj)
+{
+	if(this.title.compareToIgnoreCase(obj.getTitle())==0)
+	{
+		if(this.length==obj.getLength())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+public int compareTo(Track obj)
+{
+	if (this.title.compareToIgnoreCase(obj.getTitle())>0) return 1;
+	
+	if (this.title.compareToIgnoreCase(obj.getTitle())==0)
+	{
+		if(this.length<obj.getLength()) return -1;
+		if(this.length>obj.getLength()) return 1;
+		return 0;
+	}
+	return -1;
+	
+	
 }
 }

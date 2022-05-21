@@ -1000,7 +1000,7 @@ public class Store {
 			Media b=new Book();
 		
 			int l=0;
-		String[] display = new String[] {"--------------------------------","1. Filter Medias in cart","2. Sort Medias in cart","3. Remove Media from cart","4.Remove Tracks from CD in Cart","5.Add Tracks to CD in Cart","6. Get a lucky item from cart","7. See list of media in Cart","8. Place order","0. Back","--------------------------------","Please choose a number: 0-1-2-3-4-5"};
+		String[] display = new String[] {"--------------------------------","1. Filter Medias in cart","2. Sort Medias in cart","3. Remove Media from cart","4. Remove Tracks from CD in Cart","5. Add Tracks to CD in Cart","6. Get a lucky item from cart","7. See list of media in Cart","8. Place order","0. Back","--------------------------------","Please choose a number: 0-1-2-3-4-5"};
 	    String[] options = new String[] {"0", "1", "2", "3","4","5","6","7","8"};
 	    int response = JOptionPane.showOptionDialog(null,display,"Options:",
 	      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
@@ -1046,8 +1046,8 @@ public class Store {
 	    break;
 	    case 2:
 	    {
-	    	String[] sort= {"0.Sort by title","1.Sort by cost"};
-	    	String[] option= {"0","1"};
+	    	String[] sort= {"0.Sort by title cost","1.Sort by cost title","2.Sort by title and category"};
+	    	String[] option= {"0","1","2"};
 	    	int response1 = JOptionPane.showOptionDialog(null,sort,"Options:",
 	    		      JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 	    		        null, option,null);	
@@ -1055,16 +1055,22 @@ public class Store {
 	    	{
 	    	case 0:
 	    	{
-	    		anOrder.sortByTitle();
+	    		anOrder.sortByTitleCost();
 	    		JOptionPane.showMessageDialog(null,anOrder.getMedia(),"Here is you cart after sorted by Title",JOptionPane.INFORMATION_MESSAGE);
 	    	}
 	    	break;
 	    	case 1:
 	    	{
-	    		anOrder.sortByCost();
+	    		anOrder.sortByCostTitle();
 	    		JOptionPane.showMessageDialog(null, anOrder.getMedia(),"Here is you cart after sorted by Cost",JOptionPane.INFORMATION_MESSAGE);
 	    	}
 	    	break;
+	    	case 2:
+	    	{
+	    		anOrder.sortByTitleandCategory();
+	    		JOptionPane.showMessageDialog(null, anOrder.getMedia(),"Here is you cart after sorted by Cost",JOptionPane.INFORMATION_MESSAGE);
+	    		
+	    	}
 	    	default:break;
 	    	}
 	    	
@@ -1146,7 +1152,7 @@ public class Store {
 	    	}
 	    	else
 	    	{
-	    		JOptionPane.showMessageDialog(null,"Your Cart is empty","Oops",JOptionPane.ERROR_MESSAGE);
+	    		JOptionPane.showMessageDialog(null,"Your Cart doesn't have any Cd in","Oops",JOptionPane.ERROR_MESSAGE);
 	    	}
 	    }
 	    break;

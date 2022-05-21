@@ -109,10 +109,7 @@ public int getLength()
 public void play()
 {
 	JOptionPane.showMessageDialog(null,"Playing CD: "+this.title+"\n"+"CD length: "+this.getLength(),"CD",JOptionPane.INFORMATION_MESSAGE);;
-	for(int i=0;i<tracks.size();i++)
-	{
-		tracks.get(i).play();
-	}
+	
 }
 public void play(Track track)
 {
@@ -155,18 +152,18 @@ public String toString()
 		a.append(',');
 	}
 	a.deleteCharAt(a.length()-1);
-	return "CD    - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+this.artist+"-"+a.toString()+"\n"+
-" - "+this.getLength()+" : "+this.cost+"$";
+	return "CD    - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+this.artist+"-"+a.toString()+" - Length: "+
++this.getLength()+" : "+this.cost+"$";
 	
 }
 
 public int getNbTrack() {
 	return nbTrack;
 }
-public CompactDisc copy()
+public CompactDisc copy(CompactDisc cd)
 {
 	try {
-		return (CompactDisc)this.clone();
+		return (CompactDisc)cd.clone();
 	} catch (CloneNotSupportedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

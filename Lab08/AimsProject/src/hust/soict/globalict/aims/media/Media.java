@@ -1,8 +1,9 @@
 package hust.soict.globalict.aims.media;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
-public abstract class Media {
+public abstract class Media implements Comparable<Media>{
 
 
 public Media(String title, String category) {
@@ -35,6 +36,8 @@ protected LocalDate dateAdded;
 		// TODO Auto-generated constructor stub
 		dateAdded=LocalDate.now();
 	}
+	public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+	public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 	
 	public int getId() {
 		return id;
@@ -105,5 +108,27 @@ protected LocalDate dateAdded;
 	{
 		return "Media - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+" : "+this.cost+"$";
 	}
+public boolean equals(Media obj)
+{
+	if(this.id==obj.getId())
+	{
+		return true;
+	}
+	return false;
+}
+public int compareTo(Media obj)
+{
+	if (this.title.compareToIgnoreCase(obj.getTitle())>0) return 1;
+	
+	if (this.title.compareToIgnoreCase(obj.getTitle())==0)
+	{
+		if (this.category.compareToIgnoreCase(obj.getCategory())>0) return 1;
+		if (this.category.compareToIgnoreCase(obj.getCategory())<0) return -1;
+		return 0;
+	}
+	return -1;
+	
+	
+}
 
 }

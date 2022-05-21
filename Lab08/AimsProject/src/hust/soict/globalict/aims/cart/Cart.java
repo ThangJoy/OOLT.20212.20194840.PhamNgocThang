@@ -5,6 +5,7 @@ import hust.soict.globalict.aims.utils.DVDUtils;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.lang.Math.*;
 public class Cart {
@@ -175,8 +176,9 @@ public void addMedia(CompactDisc cd)
 		if (itemsOrdered.size()<MAX_NUMBER_ORDERED)
 		{
 			
-			itemsOrdered.add(itemsOrdered.size(),cd);
-			itemsOrderedCd.add(itemsOrderedBook.size(),cd);
+			CompactDisc cd1=cd.copy(cd);
+			itemsOrdered.add(itemsOrdered.size(),cd1);
+			itemsOrderedCd.add(itemsOrderedBook.size(),cd1);
 			
 			JOptionPane. showMessageDialog(null,"The cd Id."+ cd.getId()+ " has been added successfully");
 			 
@@ -345,7 +347,7 @@ public void removeMedia(Media disc)
 	int i,j,k=0;
 	for (i=0;i<itemsOrdered.size();i++)
 	{
-		if(itemsOrderedDvd.get(i).getId()==disc.getId())
+		if(itemsOrdered.get(i).getId()==disc.getId())
 		{
 			k=1;
 			itemsOrdered.remove(i);
@@ -506,6 +508,22 @@ public void sortByCost()
 
 	
 	
+}
+public ArrayList<Media> sortByTitleandCategory()
+{
+	Collections.sort(this.itemsOrdered);
+	return this.itemsOrdered;
+}
+
+public ArrayList<Media> sortByTitleCost()
+{
+	Collections.sort(this.itemsOrdered,Media.COMPARE_BY_TITLE_COST);
+	return this.itemsOrdered;
+}
+public ArrayList<Media> sortByCostTitle()
+{
+	Collections.sort(this.itemsOrdered,Media.COMPARE_BY_COST_TITLE);
+	return this.itemsOrdered;
 }
 /*public void search(DigitalVideoDisc disc)
 {

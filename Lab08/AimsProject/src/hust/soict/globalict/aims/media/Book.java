@@ -1,11 +1,16 @@
 package hust.soict.globalict.aims.media;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
+
 import javax.swing.JOptionPane;
 import java.util.List;
+import java.util.Map;
 
 public class Book extends Media{
 
@@ -213,21 +218,71 @@ public class Book extends Media{
 		public void setContentLength(String contentLength) {
 			this.contentLength = contentLength;
 		}
+		String content;
+		List<String> contentTokens=new ArrayList<String>();
+		Map<String,Integer> wordFrequency=new TreeMap<String,Integer>();
+		int ctl=0;
+	   
+		public Map<String,Integer> processContent()
+		{
+			contentTokens=new ArrayList<String>();
+			wordFrequency=new TreeMap<String,Integer>();
+			if(this.contentLength==null) return null;
+			else
+			{
+		  this.content=this.contentLength;
+		  content=content.toLowerCase();
+		  content=content.trim();
+		  for(int i=0;i<content.length();i++)
+				
+					if (Character.isLetter(content.charAt(i))==false)
+					{
+						if(content.charAt(i)!=' ')
+						{
+						content=content.substring(0, i)+content.substring(i+1);
+						}
+					}
+		  String[] token= content.split(" ");
+		  this.ctl=token.length;
+		
+		for(int i=0;i<token.length;i++)
+		  {
+			  contentTokens.add(token[i]);
+		  }
+		  Collections.sort(contentTokens);
+		  int k=1;
+		  int h=0;
+		 
+		  for(int i=0;i<contentTokens.size();i++)
+		  {
+			  
+			  if(wordFrequency.containsKey(contentTokens.get(i))==false)
+			  {
+				  wordFrequency.put(contentTokens.get(i),k);
+				 
+			  }
+			  else
+			  {
+				
+				h=wordFrequency.get(contentTokens.get(i));
+				h++;
+				wordFrequency.replace(contentTokens.get(i),h);
+			  }
+			  
+					  
+		  }
+		  return wordFrequency;
+			}
+		}
+		
+		
 		public String toString()
 		{
-			StringBuffer a=new StringBuffer();
-			if (this.authors.size()>0)
-			{
-			for(int i=0;i<this.authors.size();i++)
-			{
-				a.append(this.authors.get(i));
-				a.append(", ");
-			}
-			a=a.deleteCharAt(a.length()-2);
-			}
 			
-			return "BOOK  - "+"ID "+this.id+" "+this.title+" - "+this.category+" - "+a.toString()+"-"+
-		this.contentLength()+" - "+": "+this.cost+"$";
+			Map<String,Integer> map=processContent();
+			return "BOOK  - "+"ID "+this.id+"\n  Title: "+this.title+"\n  Category: "+this.category+"\n  Authors: "+ this.authors+
+		"\n  Content Length: "+this.ctl+"\n  Token List: "+this.contentTokens+"\n  Word Frequency: "+map+"\n  Cost:"+this.cost+"$";
 			
 		}
+		
 	}
