@@ -1,9 +1,0 @@
-- If the passing object is not an instance of Media, what happens?
-If the passing object is not an intance of Media, the fuction equals() will return false
-because the object is not an type of Media.
-
-Note: The Comparable interface is part of the Java class library. It is in java.lang package, so no import
-statement is needed. Please open the Java docs to see the information of this interface. Which method(s) do
-you need to implement from this interface?
-
-We need to implement the compareTo() methods from Comparable interface in the Media class.
