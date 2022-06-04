@@ -20,6 +20,7 @@ public class Store {
 	private static ArrayList<CompactDisc> itemsInStoreCd = new ArrayList<CompactDisc>();
 	private static int nbItems=0;
 	static Cart anOrder= new Cart();
+	
 	public static void addMedia(DigitalVideoDisc disc)
 	{
 		if (itemsInStore.size()<MAXIMUM)
@@ -1218,4 +1219,28 @@ public static void swap(Wrapper o1,Wrapper o2)
 		o1.a=o2.a;
 		o2.a=tmp;
 	}
+public static ArrayList<Media> getItemsInStore() {
+	return itemsInStore;
+}
+public static ArrayList<DigitalVideoDisc> getItemsInStoreDvd() {
+	return itemsInStoreDvd;
+}
+public static void setItemsInStoreDvd(ArrayList<DigitalVideoDisc> itemsInStoreDvd) {
+	Store.itemsInStoreDvd = itemsInStoreDvd;
+}
+public static ArrayList<Book> getItemsInStoreBook() {
+	return itemsInStoreBook;
+}
+public static void setItemsInStoreBook(ArrayList<Book> itemsInStoreBook) {
+	Store.itemsInStoreBook = itemsInStoreBook;
+}
+public static ArrayList<CompactDisc> getItemsInStoreCd() {
+	return itemsInStoreCd;
+}
+public static void setItemsInStoreCd(ArrayList<CompactDisc> itemsInStoreCd) {
+	Store.itemsInStoreCd = itemsInStoreCd;
+}
+public static void setItemsInStore(ArrayList<Media> itemsInStore) {
+	Store.itemsInStore = itemsInStore;
+}
 }
