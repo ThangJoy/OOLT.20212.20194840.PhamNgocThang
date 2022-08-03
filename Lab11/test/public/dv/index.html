@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <title>Elegant - Quản lý công văn giấy tờ</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="css/morris.css" rel="stylesheet">
+    <link href="css/c3.min.css" rel="stylesheet">
+    <link href="icons/themify-icons/themify-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/dashboard1.css" rel="stylesheet">
+</head>
+
+<body class="skin-default-dark fixed-layout">
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <b>
+                            <img src="images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <span>
+                            <img src="images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
+                    </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item hidden-sm-up">
+                            <a class="nav-link nav-toggler waves-effect waves-light" href="javascript:void(0)">
+                                <i class="ti-menu"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item search-box">
+                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <form class="app-search">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter">
+                                <a class="srh-btn">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown">
+                                <img src="images/users/7.jpg" alt="user" class="img-circle" width="30">
+                                <span>
+                                    <i class="fas fa-caret-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="profile.html">Your Profile</a>
+                                <div class="line"></div>
+                                <a class="dropdown-item" href="login.html">Sign Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <div class="d-flex no-block nav-text-box align-items-center">
+                <span><img src="images/logo-icon.png" alt="elegant admin template" class="logo"></span>
+                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i
+                        class="ti-menu"></i></a>
+                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i
+                        class="ti-menu ti-close"></i></a>
+            </div>
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="selected">
+                            <a class="waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
+                                <span class="icon-holder">
+                                    <i class="fas fa-home"></i>
+                                </span>
+                                <span class="hide-menu">Trang chủ</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="waves-effect waves-dark sidebar-link collapsed" href="#submenu-1"
+                                data-toggle="collapse" data-target="#submenu-1" aria-expanded="false">
+                                <span class="icon-holder">
+                                    <i class="fa fa-reply"></i>
+                                </span>
+                                <span class="hide-menu">Văn bản đến</span>
+                                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                            </a>
+                            <div class="collapse sub-sidemenu" id="submenu-1" aria-expanded="false">
+                                <ul class="flex-column nav">
+                                    <li class="nav-item">
+                                        <a href="received-cv.html" class="sidebar-link">Tạo văn bản đến</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="received-cv.html" class="sidebar-link">Danh sách văn bản đến</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="waves-effect waves-dark sidebar-link collapsed" href="#submenu-2"
+                                data-toggle="collapse" data-target="#submenu-2" aria-expanded="false">
+                                <span class="icon-holder">
+                                    <i class="fas fa-paper-plane"></i>
+                                </span>
+                                <span class="hide-menu">Văn bản đi</span>
+                                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                            </a>
+                            <div class="collapse sub-sidemenu" id="submenu-2" aria-expanded="false">
+                                <ul class="flex-column nav">
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Tạo văn bản đi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Danh sách văn bản đi</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="waves-effect waves-dark sidebar-link collapsed" href="#submenu-6"
+                                data-toggle="collapse" data-target="#submenu-6" aria-expanded="false">
+                                <span class="icon-holder">
+                                    <i class="fas fa-file-alt"></i>
+                                </span>
+                                <span class="hide-menu">Văn bản nội bộ</span>
+                                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                            </a>
+                            <div class="collapse sub-sidemenu" id="submenu-6" aria-expanded="false">
+                                <ul class="flex-column nav">
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Tạo văn bản nội bộ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Danh sách văn bản nội bộ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Phòng ban</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="waves-effect waves-dark sidebar-link collapsed" href="#submenu-4"
+                                data-toggle="collapse" data-target="#submenu-4" aria-expanded="false">
+                                <span class="icon-holder">
+                                    <i class="fas fa-pen-fancy"></i>
+                                </span>
+                                <span class="hide-menu">Phê duyệt</span>
+                                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                            </a>
+                            <div class="collapse sub-sidemenu" id="submenu-4" aria-expanded="false">
+                                <ul class="flex-column nav">
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Danh sách chưa phê duyệt</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Danh sách đã phê duyệt</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="waves-effect waves-dark sidebar-link collapsed" href="#submenu-3"
+                                data-toggle="collapse" data-target="#submenu-3" aria-expanded="false">
+                                <span class="icon-holder">
+                                    <i class="fas fa-book-open"></i>
+                                </span>
+                                <span class="hide-menu">Sổ văn bản</span>
+                                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                            </a>
+                            <div class="collapse sub-sidemenu" id="submenu-3" aria-expanded="false">
+                                <ul class="flex-column nav">
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Loại văn bản</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Nơi ban hành</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="waves-effect waves-dark sidebar-link collapsed" href="#submenu-5"
+                                data-toggle="collapse" data-target="#submenu-5" aria-expanded="false">
+                                <span class="icon-holder">
+                                    <i class="fas fa-scroll"></i>
+                                </span>
+                                <span class="hide-menu">Thống kê</span>
+                                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                            </a>
+                            <div class="collapse sub-sidemenu" id="submenu-5" aria-expanded="false">
+                                <ul class="flex-column nav">
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Thống kê văn bản đi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Thống kê văn bản đến</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="sidebar-link">Thống kê văn bản nội bộ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h4 class="text-themecolor">Trang chủ</h4>
+                    </div>
+                    <div class="col-md-7 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active"><a href="">Home</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row pt-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div>
+                                        <h5 class="card-title">Danh sách công văn</h5>
+                                    </div>
+                                    <div class="ml-auto d-none">
+                                        <select class="custom-select b-0">
+                                            <option>January</option>
+                                            <option value="1">February</option>
+                                            <option value="2" selected="">March</option>
+                                            <option value="3">April</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th>Tên công văn</th>
+                                            <th>Mã công văn</th>
+                                            <th>Loại công văn</th>
+                                            <th>Trạng thái</th>
+                                            <th>Người gửi</th>
+                                            <th>Thời gian gửi</th>
+                                            <th>Bộ phận nhận</th>
+                                            <th>Bộ phận đã xử lí</th>
+                                            <th>Bộ phận chưa xử lí</th>
+                                            <th>Số người đọc</th>
+                                            <th>File đính kèm</th>
+                                            <th>Định dạng file</th>
+                                            <th>Chi tiết</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td class="txt-oflo">123456</td>
+                                            <td class="txt-oflo">Công văn đến</td>
+                                            <td class="txt-oflo">Đang tiến hành</td>
+                                            <td class="txt-oflo">Hiệu trưởng</td>
+                                            <td class="txt-oflo">21:00 - 26/1/2019</td>
+                                            <td class="txt-oflo">Tất cả khoa</td>
+                                            <td class="txt-oflo">Khoa CNTT</td>
+                                            <td class="txt-oflo">Khoa Kinh Tế</td>
+                                            <td class="txt-oflo">30</td>
+                                            <td class="txt-oflo">
+                                                <a href="test.docx" download>Download</a>
+                                            </td>
+                                            <td class="txt-oflo">.doc</td>
+                                            <td class="txt-oflo">
+                                                <a href="Bao-cao-tong-ket-de-tai-nckh-phan-tich-quy-trinh.htm">Xem</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td class="txt-oflo">123456</td>
+                                            <td class="txt-oflo">Công văn đến</td>
+                                            <td class="txt-oflo">Đang tiến hành</td>
+                                            <td class="txt-oflo">Hiệu trưởng</td>
+                                            <td class="txt-oflo">21:00 - 26/1/2019</td>
+                                            <td class="txt-oflo">Tất cả khoa</td>
+                                            <td class="txt-oflo">Khoa CNTT</td>
+                                            <td class="txt-oflo">Khoa Kinh Tế</td>
+                                            <td class="txt-oflo">30</td>
+                                            <td class="txt-oflo">
+                                                <a href="test.docx" download>Download</a>
+                                            </td>
+                                            <td class="txt-oflo">.doc</td>
+                                            <td class="txt-oflo">
+                                                <a href="Bao-cao-tong-ket-de-tai-nckh-phan-tich-quy-trinh.htm">Xem</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td class="txt-oflo">123456</td>
+                                            <td class="txt-oflo">Công văn đến</td>
+                                            <td class="txt-oflo">Đang tiến hành</td>
+                                            <td class="txt-oflo">Hiệu trưởng</td>
+                                            <td class="txt-oflo">21:00 - 26/1/2019</td>
+                                            <td class="txt-oflo">Tất cả khoa</td>
+                                            <td class="txt-oflo">Khoa CNTT</td>
+                                            <td class="txt-oflo">Khoa Kinh Tế</td>
+                                            <td class="txt-oflo">30</td>
+                                            <td class="txt-oflo">
+                                                <a href="test.docx" download>Download</a>
+                                            </td>
+                                            <td class="txt-oflo">.doc</td>
+                                            <td class="txt-oflo">
+                                                <a href="Bao-cao-tong-ket-de-tai-nckh-phan-tich-quy-trinh.htm">Xem</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td class="txt-oflo">123456</td>
+                                            <td class="txt-oflo">Công văn đến</td>
+                                            <td class="txt-oflo">Đang tiến hành</td>
+                                            <td class="txt-oflo">Hiệu trưởng</td>
+                                            <td class="txt-oflo">21:00 - 26/1/2019</td>
+                                            <td class="txt-oflo">Tất cả khoa</td>
+                                            <td class="txt-oflo">Khoa CNTT</td>
+                                            <td class="txt-oflo">Khoa Kinh Tế</td>
+                                            <td class="txt-oflo">30</td>
+                                            <td class="txt-oflo">
+                                                <a href="test.docx" download>Download</a>
+                                            </td>
+                                            <td class="txt-oflo">.doc</td>
+                                            <td class="txt-oflo">
+                                                <a href="Bao-cao-tong-ket-de-tai-nckh-phan-tich-quy-trinh.htm">Xem</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td class="txt-oflo">123456</td>
+                                            <td class="txt-oflo">Công văn đến</td>
+                                            <td class="txt-oflo">Đang tiến hành</td>
+                                            <td class="txt-oflo">Hiệu trưởng</td>
+                                            <td class="txt-oflo">21:00 - 26/1/2019</td>
+                                            <td class="txt-oflo">Tất cả khoa</td>
+                                            <td class="txt-oflo">Khoa CNTT</td>
+                                            <td class="txt-oflo">Khoa Kinh Tế</td>
+                                            <td class="txt-oflo">30</td>
+                                            <td class="txt-oflo">
+                                                <a href="test.docx" download>Download</a>
+                                            </td>
+                                            <td class="txt-oflo">.doc</td>
+                                            <td class="txt-oflo">
+                                                <a href="Bao-cao-tong-ket-de-tai-nckh-phan-tich-quy-trinh.htm">Xem</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td class="txt-oflo">123456</td>
+                                            <td class="txt-oflo">Công văn đến</td>
+                                            <td class="txt-oflo">Đang tiến hành</td>
+                                            <td class="txt-oflo">Hiệu trưởng</td>
+                                            <td class="txt-oflo">21:00 - 26/1/2019</td>
+                                            <td class="txt-oflo">Tất cả khoa</td>
+                                            <td class="txt-oflo">Khoa CNTT</td>
+                                            <td class="txt-oflo">Khoa Kinh Tế</td>
+                                            <td class="txt-oflo">30</td>
+                                            <td class="txt-oflo">
+                                                <a href="test.docx" download>Download</a>
+                                            </td>
+                                            <td class="txt-oflo">.doc</td>
+                                            <td class="txt-oflo">
+                                                <a href="Bao-cao-tong-ket-de-tai-nckh-phan-tich-quy-trinh.htm">Xem</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="txt-oflo">Elite admin</td>
+                                            <td class="txt-oflo">123456</td>
+                                            <td class="txt-oflo">Công văn đến</td>
+                                            <td class="txt-oflo">Đang tiến hành</td>
+                                            <td class="txt-oflo">Hiệu trưởng</td>
+                                            <td class="txt-oflo">21:00 - 26/1/2019</td>
+                                            <td class="txt-oflo">Tất cả khoa</td>
+                                            <td class="txt-oflo">Khoa CNTT</td>
+                                            <td class="txt-oflo">Khoa Kinh Tế</td>
+                                            <td class="txt-oflo">30</td>
+                                            <td class="txt-oflo">
+                                                <a href="test.docx" download>Download</a>
+                                            </td>
+                                            <td class="txt-oflo">.doc</td>
+                                            <td class="txt-oflo">
+                                                <a href="Bao-cao-tong-ket-de-tai-nckh-phan-tich-quy-trinh.htm">Xem</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="pagination justify-content-end">
+                    <li><a href="">Previous</a></li>
+                    <li><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">Next</a></li>
+                </ul>
+                <div style="clear:both"></div>
+            </div>
+        </div> -->
+        <footer class="footer">
+            © 2019 Quản lý công văn by Sơn, Tuấn, Dũng
+        </footer>
+    </div>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--morris JavaScript -->
+    <script src="js/raphael-min.js"></script>
+    <script src="js/morris.min.js"></script>
+    <script src="js/jquery.sparkline.min.js"></script>
+    <!--c3 JavaScript -->
+    <script src="js/d3.min.js"></script>
+    <script src="js/c3.min.js"></script>
+    <!-- Chart JS -->
+    <script src="js/dashboard1.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
